@@ -116,11 +116,10 @@ Queue *queue_alloc(int size) {
     queue->root = (Node *)NULL;
     queue->last = (Node *)NULL;
 
-    /* Initialize dequeue to 0 as there are no items to dequeue yet */
+    // Initialize dequeue to 0 as there are no items to dequeue yet
     sem_init(&queue->dequeue, 0, 0);
-    /* Initialize enqueue to the capacity of the queue, as we can place
-     * Size amount of items in it from the get go.
-     */
+    // Initialize enqueue to the capacity of the queue, as we can place
+    // Size amount of items in it from the get go.
     sem_init(&queue->enqueue, 0, size);
     return queue;
 }
@@ -242,7 +241,7 @@ void *dequeue(Queue *queue){
                 queue->is_full = false;
             }
             if (queue->length < 0){
-                perror("Error: Buffer underflow??");
+                perror("Error: Buffer underflow?");
             }
         pthread_mutex_unlock(queue->lock);
     // We can now enqueue another item
